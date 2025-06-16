@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>Happy Birthday Tayyaba - Celebration Card</title>
+<!-- Material Icons -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@700&display=swap');
+
+  /* Reset and base */
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    height: 100vh;
+    background: linear-gradient(270deg, #1a1a40, #0f0f2a, #1a1a40);
+    background-size: 600% 600%;
+    animation: bgGradientShift 15s ease infinite;
+    font-family: 'Outfit', sans-serif;
+    color: #00ffff;
+    overflow-x: hidden;
+    cursor: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1rem 3rem 1rem;
+  }
+
+  @keyframes bgGradientShift {
+    0% {background-position:0% 50%;}
+    50% {background-position:100% 50%;}
+    100% {background-position:0% 50%;}
+  }
+
+  /* Neon Glow Heading */
+  header {
+    text-align: center;
+    margin-top: 2rem;
+    user-select: none;
+  }
+
+  h1 {
+    font-size: clamp(2.75rem, 6vw, 5rem);
+    font-weight: 800;
+    color: #0ff9ff;
+    text-shadow:
+      0 0 5px #0ff9ff,
+      0 0 10px #0ff9ff,
+      0 0 20px #0ff9ff,
+      0 0 40px #00ffff,
+      0 0 80px #00ffff,
+      0 0 90px #00ffff;
+    animation: flickerNeon 3s linear infinite alternate;
+    letter-spacing: 0.2em;
+  }
+
+  @keyframes flickerNeon {
+    0%, 100% {
+      text-shadow:
+        0 0 10px #0ff9ff,
+        0 0 20px #0ff9ff,
+        0 0 30px #00ffff,
+        0 0 40px #00ffff,
+        0 0 50px #00ffff,
+        0 0 60px #00ffff;
+      color: #0ff9ff;
+    }
+    50% {
+      text-shadow:
+        0 0 5px #0ff9ff,
+        0 0 7px #0ff9ff,
+        0 0 10px #00ffff,
+        0 0 15px #00ffff,
+        0 0 20px #00ffff,
+        0 0 25px #00ffff;
+      color: #40eeee;
+    }
+  }
+
+  /* Custom Neon Cursor */
+  #cursor-follower {
+    position: fixed;
+    top: 0; left: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #00ffff;
+    pointer-events: none;
+    mix-blend-mode: screen;
+    filter: drop-shadow(0 0 6px #00ffff);
+    transition: transform 0.15s ease-out;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+  }
+
+  /* Fireworks Canvas */
+  #fireworks-canvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Party Popper CSS Animation */
+  .party-popper-container {
+    position: fixed;
+    bottom: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    z-index: 2;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  .party-popper {
+    width: 40px;
+    height: 60px;
+    background: linear-gradient(135deg, #00fff7, #0ff9ff);
+    border-radius: 8px 8px 20px 20px;
+    position: relative;
+    filter: drop-shadow(0 0 4px #0ff9ff);
+    animation: popperScale 2.5s ease infinite;
+  }
+  .party-popper:nth-child(2){
+    animation-delay: 1.2s;
+  }
+  .party-popper::before {
+    content: '';
+    width: 6px;
+    height: 12px;
+    background: #00fcff;
+    border-radius: 3px;
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    filter: drop-shadow(0 0 3px #00fff7);
+    animation: popperFuse 2.5s ease infinite;
+  }
+  /* Spark particles */
+  .popper-spark {
+    position: absolute;
+    border-radius: 50%;
+    background: #00ffff;
+    filter: drop-shadow(0 0 6px #00ffff);
+    animation-timing-function: ease-out;
+  }
+  .popper-spark:nth-child(1) {
+    width: 6px; height: 6px;
+    top: -20px; left: 15px;
+    animation: sparkMove1 2.5s infinite;
+  }
+  .popper-spark:nth-child(2) {
+    width: 5px; height: 5px;
+    top: -14px; left: 30px;
+    animation: sparkMove2 2.5s infinite;
+  }
+  .popper-spark:nth-child(3) {
+    width: 3px; height: 3px;
+    top: -18px; left: 24px;
+    animation: sparkMove3 2.5s infinite;
+  }
+  @keyframes popperScale {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-10px) scale(1.1); }
+  }
+  @keyframes popperFuse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+  @keyframes sparkMove1 {
+    0% { transform: translateY(0) translateX(0) scale(1); opacity: 1; }
+    100% { transform: translateY(-40px) translateX(15px) scale(0.3); opacity: 0; }
+  }
+  @keyframes sparkMove2 {
+    0% { transform: translateY(0) translateX(0) scale(1); opacity: 1; }
+    100% { transform: translateY(-28px) translateX(20px) scale(0.3); opacity: 0; }
+  }
+  @keyframes sparkMove3 {
+    0% { transform: translateY(0) translateX(0) scale(1); opacity: 1; }
+    100% { transform: translateY(-45px) translateX(15px) scale(0.4); opacity: 0; }
+  }
+
+  /* Slideshow container */
+  .slideshow-container {
+    position: relative;
+    width: 90vw;
+    max-width: 400px;
+    margin: 2rem auto 0 auto;
+    background: rgba(0, 255, 255, 0.1);
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    box-shadow:
+      0 4px 30px rgba(0, 255, 255, 0.3);
+    overflow: hidden;
+    user-select: none;
+  }
+  /* Slide */
+  .slide {
+    opacity: 0;
+    width: 100%;
+    height: 360px;
+    position: absolute;
+    top: 0; left: 0;
+    transition: opacity 1s ease;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #00ffff;
+    padding: 1rem 2rem;
+    text-align: center;
+    box-sizing: border-box;
+  }
+  .slide.active {
+    opacity: 1;
+    position: relative;
+  }
+  .slide img {
+    max-width: 100%;
+    max-height: 220px;
+    border-radius: 12px;
+    box-shadow:
+      0 0 20px #00ffff;
+  }
+  .slide h3 {
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-shadow:
+      0 0 5px #00ffff,
+      0 0 10px #0ff9ff;
+  }
+  .slide p {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    color: #a0f0f0;
+    max-width: 90%;
+  }
+  /* Navigation buttons */
+  .nav-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: transparent;
+    color: #00ffff;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 0.25rem 0.5rem;
+    user-select: none;
+    transition: color 0.3s ease;
+    z-index: 10;
+  }
+  .nav-button:hover {
+    color: #40ffff;
+  }
+  .nav-button:focus {
+    outline: 2px solid #40ffff;
+    outline-offset: 2px;
+  }
+  .nav-prev {
+    left: 8px;
+    border-radius: 4px;
+  }
+  .nav-next {
+    right: 8px;
+    border-radius: 4px;
+  }
+
+  /* Responsive */
+  @media (max-width: 480px) {
+    h1 {
+      font-size: 2.5rem;
+    }
+    .slideshow-container {
+      max-width: 320px;
+      height: 390px;
+    }
+    .slide img {
+      max-height: 180px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Happy Birthday Tayyaba</h1>
+</header>
+
+<!-- Fireworks Canvas -->
+<canvas id="fireworks-canvas" aria-hidden="true"></canvas>
+
+<!-- Party popper animations -->
+<div class="party-popper-container" aria-hidden="true">
+  <div class="party-popper">
+    <span class="popper-spark"></span>
+    <span class="popper-spark"></span>
+    <span class="popper-spark"></span>
+  </div>
+  <div class="party-popper">
+    <span class="popper-spark"></span>
+    <span class="popper-spark"></span>
+    <span class="popper-spark"></span>
+  </div>
+</div>
+
+<!-- Slideshow card -->
+<section class="slideshow-container" aria-label="Birthday cake slideshow">
+  <button class="nav-button nav-prev" aria-label="Previous slide">&#10094;</button>
+  <button class="nav-button nav-next" aria-label="Next slide">&#10095;</button>
+
+  <article class="slide active" role="group" aria-roledescription="slide" aria-label="Chocolate Birthday Cake">
+    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/b58f3b74-118c-426f-9222-f927aadc88ec.png" alt="Chocolate birthday cake with colorful candles and sprinkles" />
+    <h3>Chocolate Birthday Cake</h3>
+    <p>Delicious rich chocolate cake topped with sprinkles and glowing candles.</p>
+  </article>
+
+  <article class="slide" role="group" aria-roledescription="slide" aria-label="Pink Rose Cake">
+    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/414f291d-0520-414f-9055-c2b18372ae83.png" alt="Pink rose decorated birthday cake on a white plate" />
+    <h3>Pink Rose Cake</h3>
+    <p>Elegant cake decorated with pink rose frosting, perfect for special occasions.</p>
+  </article>
+
+  <article class="slide" role="group" aria-roledescription="slide" aria-label="Vanilla Celebration Cake">
+    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/fa34d600-aba8-48ac-be66-47aec24b6e47.png" alt="Vanilla birthday cake with neon blue icing and candles" />
+    <h3>Vanilla Celebration Cake</h3>
+    <p>Classic vanilla cake with neon blue icing and bright candles to celebrate.</p>
+  </article>
+</section>
+
+<!-- Custom neon cursor follower -->
+<div id="cursor-follower" aria-hidden="true"></div>
+
+<script>
+  // Custom cursor follower
+  const cursorFollower = document.getElementById('cursor-follower');
+  window.addEventListener('mousemove', e => {
+    cursorFollower.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%) scale(1)`;
+  });
+
+  // Slideshow logic
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.slide');
+  const totalSlides = slides.length;
+  const prevBtn = document.querySelector('.nav-prev');
+  const nextBtn = document.querySelector('.nav-next');
+
+  function showSlide(index) {
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('active', i === index);
+    });
+  }
+
+  prevBtn.addEventListener('click', () => {
+    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+    showSlide(currentSlide);
+  });
+
+  nextBtn.addEventListener('click', () => {
+    currentSlide = (currentSlide + 1) % totalSlides;
+    showSlide(currentSlide);
+  });
+
+  // Auto slide every 6 seconds
+  setInterval(() => {
+    currentSlide = (currentSlide + 1) % totalSlides;
+    showSlide(currentSlide);
+  }, 6000);
+
+  // Fireworks animation adapted with canvas
+  const canvas = document.getElementById('fireworks-canvas');
+  const ctx = canvas.getContext('2d');
+  let cw, ch;
+  let fireworks = [];
+  let particles = [];
+  const colors = [
+    '#00ffff',
+    '#0ff9ff',
+    '#00e0e0',
+    '#40ffff',
+    '#08f9f9'
+  ];
+
+  function resize() {
+    cw = window.innerWidth;
+    ch = window.innerHeight;
+    canvas.width = cw * devicePixelRatio;
+    canvas.height = ch * devicePixelRatio;
+    canvas.style.width = cw + 'px';
+    canvas.style.height = ch + 'px';
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.scale(devicePixelRatio, devicePixelRatio);
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  class Firework {
+    constructor(sx, sy, tx, ty, color) {
+      this.x = sx;
+      this.y = sy;
+      this.sx = sx;
+      this.sy = sy;
+      this.tx = tx;
+      this.ty = ty;
+      this.distanceToTarget = dist(sx, sy, tx, ty);
+      this.distanceTraveled = 0;
+      this.coordinates = [];
+      this.coordinateCount = 3;
+      while(this.coordinateCount--) {
+        this.coordinates.push([this.x, this.y]);
+      }
+      this.angle = Math.atan2(ty - sy, tx - sx);
+      this.speed = 4 + Math.random() * 3;
+      this.acceleration = 1.05;
+      this.brightness = randomInt(50, 70);
+      this.color = color;
+    }
+    update(index) {
+      this.coordinates.pop();
+      this.coordinates.unshift([this.x, this.y]);
+      this.speed *= this.acceleration;
+      let vx = Math.cos(this.angle) * this.speed;
+      let vy = Math.sin(this.angle) * this.speed;
+      this.distanceTraveled = dist(this.sx, this.sy, this.x + vx, this.y + vy);
+      if(this.distanceTraveled >= this.distanceToTarget) {
+        createParticles(this.tx, this.ty, this.color);
+        fireworks.splice(index, 1);
+      } else {
+        this.x += vx;
+        this.y += vy;
+      }
+    }
+    draw() {
+      ctx.beginPath();
+      ctx.moveTo(this.coordinates[this.coordinates.length - 1][0], this.coordinates[this.coordinates.length - 1][1]);
+      ctx.lineTo(this.x, this.y);
+      ctx.strokeStyle = `hsl(180, 100%, ${this.brightness}%)`;
+      ctx.lineWidth = 2;
+      ctx.shadowColor = this.color;
+      ctx.shadowBlur = 8;
+      ctx.stroke();
+    }
+  }
+
+  class Particle {
+    constructor(x, y, color) {
+      this.x = x;
+      this.y = y;
+      this.coordinates = [];
+      this.coordinateCount = 5;
+      while(this.coordinateCount--) {
+        this.coordinates.push([this.x, this.y]);
+      }
+      this.angle = Math.random() * 2 * Math.PI;
+      this.speed = randomFloat(1,6);
+      this.friction = 0.95;
+      this.gravity = 0.15;
+      this.hue = 180;
+      this.brightness = randomInt(50, 80);
+      this.alpha = 1;
+      this.decay = randomFloat(0.015, 0.03);
+      this.color = color;
+      this.velX = Math.cos(this.angle) * this.speed;
+      this.velY = Math.sin(this.angle) * this.speed;
+    }
+    update(index) {
+      this.coordinates.pop();
+      this.coordinates.unshift([this.x, this.y]);
+      this.velX *= this.friction;
+      this.velY *= this.friction;
+      this.velY += this.gravity;
+      this.x += this.velX;
+      this.y += this.velY;
+      this.alpha -= this.decay;
+      if (this.alpha <= 0) {
+        particles.splice(index, 1);
+      }
+    }
+    draw() {
+      ctx.beginPath();
+      ctx.moveTo(this.coordinates[this.coordinates.length - 1][0], this.coordinates[this.coordinates.length - 1][1]);
+      ctx.lineTo(this.x, this.y);
+      ctx.strokeStyle = `rgba(0, 255, 255, ${this.alpha})`;
+      ctx.lineWidth = 2;
+      ctx.shadowColor = this.color;
+      ctx.shadowBlur = 10;
+      ctx.stroke();
+    }
+  }
+
+  function dist(x1, y1, x2, y2) {
+    const dx = x2 - x1;
+    const dy = y2 - y1;
+    return Math.sqrt(dx*dx + dy*dy);
+  }
+
+  function randomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+  function randomFloat(min, max) {
+    return Math.random() * (max - min) + min;
+  }
+
+  function createParticles(x, y, color) {
+    const count = 30 + Math.floor(Math.random() * 15);
+    for(let i=0; i<count; i++) {
+      particles.push(new Particle(x, y, color));
+    }
+  }
+
+  let timer = 0;
+  let timerTotal = 50;
+
+  function loop() {
+    requestAnimationFrame(loop);
+    ctx.globalAlpha = 0.15;
+    ctx.fillStyle = 'rgba(10, 10, 35, 0.15)';
+    ctx.fillRect(0, 0, cw, ch);
+    ctx.globalAlpha = 1;
+
+    for(let i = fireworks.length -1; i >= 0; i--) {
+      fireworks[i].draw();
+      fireworks[i].update(i);
+    }
+    for(let i = particles.length -1; i >=0; i--) {
+      particles[i].draw();
+      particles[i].update(i);
+    }
+
+    if(timer >= timerTotal) {
+      let startX = cw / 2 + (Math.random() * cw / 2 - cw / 4);
+      let startY = ch;
+      let targetX = Math.random() * cw;
+      let targetY = Math.random() * ch/2;
+      let color = colors[Math.floor(Math.random() * colors.length)];
+      fireworks.push(new Firework(startX, startY, targetX, targetY, color));
+      timer = 0;
+    } else {
+      timer++;
+    }
+  }
+
+  loop();
+
+</script>
+
+</body>
+</html>
+
