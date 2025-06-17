@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Website Developer Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+<style>
+  /* Reset and base */
+  *, *::before, *::after {
+    margin: 0; padding: 0; box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    min-height: 100vh;
+    color: #e0f7fa;
+    display: flex;
+    flex-direction: column;
+  }
+
+  a {
+    color: #00ffc8;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  a:hover, a:focus {
+    color: #39ff14;
+  }
+
+  header {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 1.5rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  .logo {
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: #00ffc8;
+    letter-spacing: 2px;
+  }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+  }
+
+  nav ul li a {
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 6px;
+  }
+
+  nav ul li a:hover,
+  nav ul li a:focus {
+    background-color: #00ffc8;
+    color: #002222;
+    outline: none;
+  }
+
+  main {
+    flex-grow: 1;
+    max-width: 960px;
+    margin: 4rem auto 3rem;
+    padding: 0 1.5rem;
+  }
+
+  section {
+    margin-bottom: 6rem;
+  }
+
+  /* Hero Section */
+  .hero {
+    text-align: center;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 900;
+    color: #39ff14;
+    text-shadow:
+      0 0 5px #39ff14,
+      0 0 15px #00ffc8,
+      0 0 30px #00ffc8;
+  }
+
+  .hero p {
+    margin-top: 1rem;
+    font-weight: 500;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    color: #a0fff0;
+  }
+
+  /* Skills Section */
+  .skills-list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+  .skill-item {
+    background: rgba(0, 255, 200, 0.1);
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    font-weight: 600;
+    color: #00ffc8;
+    box-shadow:
+      0 0 5px #00ffc8,
+      0 0 15px #00ffc8;
+    transition: transform 0.3s ease;
+    cursor: default;
+  }
+  .skill-item:hover {
+    transform: scale(1.1);
+  }
+
+  /* Projects Section */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+    gap: 2rem;
+  }
+  .project-card {
+    background: rgba(0, 255, 180, 0.12);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow:
+      0 0 10px rgba(0, 255, 180, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+  }
+  .project-card:hover,
+  .project-card:focus-within {
+    transform: translateY(-10px);
+    box-shadow:
+      0 15px 30px rgba(0, 255, 180, 0.6);
+  }
+  .project-image {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    filter: brightness(0.9);
+    transition: filter 0.3s ease;
+  }
+  .project-card:hover .project-image {
+    filter: brightness(1);
+  }
+  .project-content {
+    padding: 1rem 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .project-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: #00ffc8;
+  }
+  .project-description {
+    flex-grow: 1;
+    font-size: 1rem;
+    color: #a0fff0;
+    line-height: 1.4;
+  }
+  .project-links {
+    margin-top: 1rem;
+    display: flex;
+    gap: 1rem;
+  }
+  .project-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-weight: 600;
+    color: #00ffc8;
+  }
+  .project-links a:hover {
+    color: #39ff14;
+  }
+  .project-links .material-icons {
+    font-size: 1.2rem;
+  }
+
+  /* Contact Section */
+  .contact {
+    text-align: center;
+  }
+  .contact h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #00ffc8;
+    margin-bottom: 1rem;
+    text-shadow:
+      0 0 4px #00ffc8;
+  }
+  .contact p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    color: #a0fff0;
+  }
+  .contact a {
+    font-weight: 700;
+    font-size: 1.2rem;
+    padding: 0.6rem 1.2rem;
+    border: 2px solid #00ffc8;
+    border-radius: 8px;
+    display: inline-block;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  .contact a:hover, .contact a:focus {
+    background-color: #00ffc8;
+    color: #002222;
+    outline: none;
+  }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 1rem 1rem 2rem 1rem;
+    font-size: 0.9rem;
+    color: #00ffc8;
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    header {
+      flex-direction: column;
+      gap: 1rem;
+    }
+    nav ul {
+      gap: 1rem;
+    }
+    .skills-list {
+      gap: 1rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo" tabindex="0">DevName</div>
+  <nav aria-label="Primary Navigation">
+    <ul>
+      <li><a href="#hero" tabindex="0">Home</a></li>
+      <li><a href="#skills" tabindex="0">Skills</a></li>
+      <li><a href="#projects" tabindex="0">Projects</a></li>
+      <li><a href="#contact" tabindex="0">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section id="hero" class="hero" tabindex="0">
+    <h1>Hi, I'm DevName</h1>
+    <p>Website Developer specializing in modern, responsive, and performant web applications with intuitive user experiences.</p>
+  </section>
+
+  <section id="skills" tabindex="0">
+    <h2 style="color:#00ffc8; margin-bottom:1rem; text-align:center;">Skills</h2>
+    <div class="skills-list">
+      <div class="skill-item">HTML5</div>
+      <div class="skill-item">CSS3 / SCSS</div>
+      <div class="skill-item">JavaScript (ES6+)</div>
+      <div class="skill-item">React.js</div>
+      <div class="skill-item">TypeScript</div>
+      <div class="skill-item">Node.js</div>
+      <div class="skill-item">Responsive Design</div>
+      <div class="skill-item">Git & Github</div>
+      <div class="skill-item">REST & GraphQL APIs</div>
+    </div>
+  </section>
+
+  <section id="projects" tabindex="0">
+    <h2 style="color:#00ffc8; margin-bottom:1rem; text-align:center;">Projects</h2>
+    <div class="projects-grid">
+      <article class="project-card" tabindex="0">
+        <img class="project-image" src="https://placehold.co/600x450/00ffc8/002222?text=Project+1+Dashboard" alt="Screenshot of Project 1 Dashboard" />
+        <div class="project-content">
+          <h3 class="project-title">Project One</h3>
+          <p class="project-description">A responsive dashboard app demonstrating charts, data visualization, and user management.</p>
+          <div class="project-links">
+            <a href="#" target="_blank" rel="noopener" aria-label="Visit Project One live demo">Demo <span class="material-icons" aria-hidden="true">launch</span></a>
+            <a href="#" target="_blank" rel="noopener" aria-label="View Project One source code on GitHub">Code <span class="material-icons" aria-hidden="true">code</span></a>
+          </div>
+        </div>
+      </article>
+      <article class="project-card" tabindex="0">
+        <img class="project-image" src="https://placehold.co/600x450/00ffc8/002222?text=Project+2+E-commerce" alt="Screenshot of Project 2 E-commerce website" />
+        <div class="project-content">
+          <h3 class="project-title">Project Two</h3>
+          <p class="project-description">An e-commerce website featuring product filters, cart functionality, and secure checkout.</p>
+          <div class="project-links">
+            <a href="#" target="_blank" rel="noopener" aria-label="Visit Project Two live demo">Demo <span class="material-icons" aria-hidden="true">launch</span></a>
+            <a href="#" target="_blank" rel="noopener" aria-label="View Project Two source code on GitHub">Code <span class="material-icons" aria-hidden="true">code</span></a>
+          </div>
+        </div>
+      </article>
+      <article class="project-card" tabindex="0">
+        <img class="project-image" src="https://placehold.co/600x450/00ffc8/002222?text=Project+3+Portfolio" alt="Screenshot of Project 3 Portfolio site" />
+        <div class="project-content">
+          <h3 class="project-title">Project Three</h3>
+          <p class="project-description">Personal portfolio site with smooth animations, modern design, and contact integration.</p>
+          <div class="project-links">
+            <a href="#" target="_blank" rel="noopener" aria-label="Visit Project Three live demo">Demo <span class="material-icons" aria-hidden="true">launch</span></a>
+            <a href="#" target="_blank" rel="noopener" aria-label="View Project Three source code on GitHub">Code <span class="material-icons" aria-hidden="true">code</span></a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="contact" class="contact" tabindex="0">
+    <h2>Contact Me</h2>
+    <p>If you want to reach out, discuss a project, or just say hello, feel free to get in touch!</p>
+    <a href="mailto:devname@example.com" aria-label="Send email to DevName">Send Email</a>
+  </section>
+</main>
+
+<footer>
+  &copy; 2025 DevName. All rights reserved.
+</footer>
+
+</body>
+</html>
+
